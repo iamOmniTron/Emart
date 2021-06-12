@@ -27,7 +27,7 @@ const UserSchema = new Schema({
   vendor: {
     type: Boolean,
   },
-  stores: {
+  store: {
     type: String,
   },
   credits: {
