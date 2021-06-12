@@ -1,5 +1,17 @@
 import { config } from "dotenv";
 config();
-export const { SERVER_PORT } = process.env as {
+export const {
+  SERVER_PORT,
+  MAIL_SERVICE,
+  GMAIL_SERVICE_HOST,
+  GMAIL_SERVICE_SECURE,
+  GMAIL_SERVICE_PORT,
+  GMAIL_USER_NAME,
+  GMAIL_USER_PASSWORD,
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+  ACCESS_TOKEN_LIFETIME,
+  REFRESH_TOKEN_LIFETIME,
+} = process.env as {
   [key: string]: string;
 };
