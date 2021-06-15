@@ -16,6 +16,10 @@ const ProductSchema = new Schema({
     default: 0.0,
     required: true,
   },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
   color: {
     type: String,
   },
@@ -32,6 +36,7 @@ const ProductSchema = new Schema({
 export interface IProduct {
   category: string;
   name: string;
+  imageUrl: string;
   price: number;
   color?: string;
   gender?: string;
