@@ -5,3 +5,10 @@ export interface IUserRegInfo {
   email: string;
   imageUrl?: string;
 }
+
+export interface IUserUpdateData {
+  firstname?: string;
+  lastname?: string;
+  phone?: string;
+  imageUrl?: string;
+}
