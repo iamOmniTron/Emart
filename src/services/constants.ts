@@ -29,3 +29,8 @@ export enum ProductCategories {
   EARRINGS = "earrings",
   DRESS = "dress",
 }
+
+export interface IReviewData {
+  review?: string;
+  rating?: number;
+}
