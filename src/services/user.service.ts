@@ -86,17 +86,11 @@ export const updateCredit = async (
 ): Promise<boolean> => {
   try {
     // TODO: find a way to optimize this
-    // const updated = await User.findOneAndUpdate(
-    //   { _id: userId },
-    //   { $set: { credits: +(this.credits! + unit) } }
-    // );
-    // if (!updated) return false;
-    // return true;
-    const user = await User.findOne({ _id: userId });
-    if (!user) return false;
-    user.credits! += +unit;
-    const isSaved = await user.save();
-    if (!isSaved) return false;
+    const updated = await User.findOneAndUpdate(
+      { _id: userId },
+      { $inc: { credits: parseInt("unit") } }
+    );
+    if (!updated) return false;
     return true;
   } catch (error) {
     return false;
