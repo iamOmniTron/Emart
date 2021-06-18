@@ -13,13 +13,16 @@ const UserSchema = new Schema({
   googleId: {
     type: String,
     required: true,
+    unique: true,
   },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   phone: {
     type: String,
+    unique: true,
   },
   imageUrl: {
     type: String,
@@ -46,7 +49,7 @@ export interface IUserDoc extends Document {
   goodleId: string;
   imageUrl?: string;
   vendor?: boolean;
-  stores?: string | Array<string>;
+  store?: string | Array<string>;
   credits?: number;
 }
 
