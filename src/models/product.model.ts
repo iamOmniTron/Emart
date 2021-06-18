@@ -8,11 +8,11 @@ const ProductSchema = new Schema({
     required: true,
   },
   name: {
-    type: string,
+    type: String,
     min: 3,
   },
   price: {
-    type: Types.Decimal,
+    type: Schema.Types.Decimal128,
     default: 0.0,
     required: true,
   },
