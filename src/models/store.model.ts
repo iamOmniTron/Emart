@@ -2,6 +2,7 @@ import { model, Document, Schema, Types } from "mongoose";
 import { User } from "./user.model";
 import { Product } from "./product.model";
 import { Review } from "./review.model";
+import { NEW_STORE_VALIDITY as STORE_VALIDITY } from "../config/config";
 
 const StoreSchema = new Schema({
   name: {
@@ -17,7 +18,7 @@ const StoreSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  online: {
+  active: {
     type: Boolean,
   },
   reviews: [
@@ -32,15 +33,20 @@ const StoreSchema = new Schema({
       ref: "Product",
     },
   ],
+  storeValidity: {
+    type: Date,
+    default: parseInt(STORE_VALIDITY),
+  },
 });
 
 export interface IStore extends Document {
   name: string;
   vendor: string;
   createdAt: string;
-  online?: boolean;
+  active?: boolean;
   reviews?: Array<string>;
   products?: Array<string>;
+  storeValidity?: number;
 }
 
 export const Store = model<IStore>("Store", StoreSchema);
