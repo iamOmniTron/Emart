@@ -3,7 +3,7 @@ import { IReviewData } from "./constants";
 
 export const createReview = async (reviews: IReviewData): Promise<Boolean> => {
   try {
-    const review = new Review(...reviews);
+    const review = new Review({ ...reviews });
     const isReviewed = await review.save();
     if (!isReviewed) return false;
     return true;
@@ -37,7 +37,7 @@ export const getReview = async (reviewId: string): Promise<IReview | null> => {
 export const updateReview = async (
   reviewId: string,
   review: IReviewData
-): Promise<IReview | null> => {
+): Promise<Boolean> => {
   try {
     const isUpdated = await Review.findOneAndUpdate(
       { _id: reviewId },
@@ -47,7 +47,7 @@ export const updateReview = async (
     if (!isUpdated) return false;
     return true;
   } catch (error) {
-    return null;
+    return false;
   }
 };
 
