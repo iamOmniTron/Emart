@@ -19,6 +19,7 @@ export interface IProductDetails {
   name: string;
   price: number;
   imageUrl: string;
+  storeId: string;
   gender?: string;
   seller?: string;
 }
@@ -31,6 +32,13 @@ export enum ProductCategories {
 }
 
 export interface IReviewData {
-  review?: string;
-  rating?: number;
+  reviewerId: string;
+  storeId: string;
+  review: string;
+  rating: number;
+}
+
+export interface IStoreDetails {
+  name: string;
+  vendor: string;
 }
