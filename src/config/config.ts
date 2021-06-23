@@ -12,6 +12,7 @@ export const {
   REFRESH_TOKEN_SECRET,
   ACCESS_TOKEN_LIFETIME,
   REFRESH_TOKEN_LIFETIME,
+  NEW_STORE_VALIDITY,
 } = process.env as {
   [key: string]: string;
 };
