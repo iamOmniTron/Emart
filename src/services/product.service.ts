@@ -55,15 +55,23 @@ export const fetchByCategory = async (
         products = await Product.find({ category: "dress" });
         return products;
         break;
-      case Categories.BAGS:
-        products = await Product.find({ category: "bag" });
-        return products;
-        break;
 
       default:
         products = null;
         break;
     }
+    return products;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const fetchByStore = async (
+  storeId: string
+): Promise<Array<IProduct> | null> => {
+  try {
+    const products = await Product.find({ storeId });
+    if (!products) return null;
     return products;
   } catch (error) {
     return null;
