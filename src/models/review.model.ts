@@ -1,6 +1,18 @@
 import { model, Document, Schema, Types } from "mongoose";
+import { User } from "./user.model";
+import { Store } from "./store.model";
 
 const ReviewSchema = new Schema({
+  reviewerId: {
+    type: Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  storeId: {
+    type: Types.ObjectId,
+    ref: "Store",
+    required: true,
+  },
   review: {
     type: String,
     min: 5,
@@ -17,9 +29,11 @@ const ReviewSchema = new Schema({
 });
 
 export interface IReview extends Document {
+  reviewerId: string;
+  storeId: string;
   review: string;
   rating: number;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export const Review = model<IReview>("Review", ReviewSchema);
