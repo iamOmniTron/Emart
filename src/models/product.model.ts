@@ -1,5 +1,6 @@
 import { model, Schema, Types, Document } from "mongoose";
 import { User } from "./user.model";
+import { Store } from "./store.model";
 
 const ProductSchema = new Schema({
   category: {
@@ -31,9 +32,13 @@ const ProductSchema = new Schema({
     type: Types.ObjectId,
     ref: "User",
   },
+  storeId: {
+    type: String,
+    ref: "Store",
+  },
 });
 
-export interface IProduct {
+export interface IProduct extends Document {
   category: string;
   name: string;
   imageUrl: string;
@@ -41,6 +46,7 @@ export interface IProduct {
   color?: string;
   gender?: string;
   seller?: string;
+  storeId?: string;
 }
 
 export const Product = model<IProduct>("Product", ProductSchema);
