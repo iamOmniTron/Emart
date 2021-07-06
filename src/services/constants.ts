@@ -1,3 +1,5 @@
+import { IProduct } from "../models/product.model";
+
 export interface IUserRegInfo {
   firstname: string;
   lastname: string;
@@ -41,4 +43,14 @@ export interface IReviewData {
 export interface IStoreDetails {
   name: string;
   vendor: string;
+}
+
+export interface ICartItems {
+  items: string | Array<string>;
+  price: number;
+}
+
+export interface Item {
+  product: IProduct;
+  unit: number;
 }
