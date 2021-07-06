@@ -16,7 +16,7 @@ export const createProduct = async (
 
 export const fetchAllProducts = async (): Promise<Array<IProduct> | null> => {
   try {
-    const products = await Product.find({}).lean();
+    const products = await Product.find({});
     if (!products || products == null) return null;
 
     return products;
