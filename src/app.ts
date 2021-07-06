@@ -1,6 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import { SERVER_PORT as PORT } from "./config/config";
-import cors from "cors"
+require("./config/config/_dbinit")();
+import cors from "cors";
 
 const app: Application = express();
 app.use(cors());

@@ -13,6 +13,7 @@ export const {
   ACCESS_TOKEN_LIFETIME,
   REFRESH_TOKEN_LIFETIME,
   NEW_STORE_VALIDITY,
+  MONGO_URI_DEV,
 } = process.env as {
   [key: string]: string;
 };
