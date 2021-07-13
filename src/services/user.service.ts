@@ -3,7 +3,9 @@ import {
   IUserRegInfo as RegInfo,
   IUserUpdateData as UpdateData,
 } from "./constants";
+import paginate from "../utils/paginator";
 
+// TODO: find a way to paginate
 export const createUser = async (info: RegInfo): Promise<boolean> => {
   try {
     const user = new User({
@@ -21,6 +23,7 @@ export const getUser = async (userId: string): Promise<IUserDoc | null> => {
   try {
     const user = await User.findOne({ _id: userId });
     if (!user) return null;
+    // return paginate(user);
     return user;
   } catch (error) {
     return null;
@@ -31,6 +34,7 @@ export const getVendor = async (userId: string): Promise<IUserDoc | null> => {
   try {
     const vendor = await User.findOne({ _id: userId, vendor: true });
     if (!vendor) return null;
+    // return paginate(vendor);
     return vendor;
   } catch (error) {
     return null;
@@ -44,6 +48,7 @@ export const fetchAllUsers = async (): Promise<Array<IUserDoc> | null> => {
       .skip(0 * 20)
       .limit(20);
     if (!users) return null;
+    // return paginate(users);
     return users;
   } catch (error) {
     return null;
@@ -57,6 +62,7 @@ export const fetchAllVendors = async (): Promise<Array<IUserDoc> | null> => {
       .skip(0 * 20)
       .limit(20);
     if (!vendors) return null;
+    // return paginate(vendors);
     return vendors;
   } catch (error) {
     return null;
