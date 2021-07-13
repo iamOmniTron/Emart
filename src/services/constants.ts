@@ -1,4 +1,5 @@
 import { IProduct } from "../models/product.model";
+import Cart from "./cart.service";
 
 export interface IUserRegInfo {
   firstname: string;
@@ -53,4 +54,13 @@ export interface ICartItems {
 export interface Item {
   product: IProduct;
   unit: number;
+}
+
+export interface OrderItems {
+  cart: Cart;
+  phone?: string;
+  couponCode?: string;
+  city: string;
+  notes?: string;
+  street: string;
 }
