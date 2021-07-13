@@ -33,6 +33,9 @@ const OrderSchema = new Schema({
     type: Date,
     dafault: Date.now,
   },
+  totalItem: {
+    type: String,
+  },
   address: {
     city: {
       type: String,
@@ -58,7 +61,8 @@ export interface IOrder extends Document {
   user: string;
   phone: string;
   total?: number;
-  status: string;
+  totalItem: number;
+  status?: string;
   products: Array<string>;
   orderedAt?: string;
   address: IAddress;
