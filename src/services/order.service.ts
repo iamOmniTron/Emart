@@ -20,7 +20,7 @@ export const createOrder = async (order: OrderItems): Promise<boolean> => {
         discount = 0;
       }
     }
-    //deduct coupon discount from total price
+
     const discountedPrice = +(totalPrice - discount);
 
     const newOrder = new Order({
@@ -72,7 +72,7 @@ export const rejectOrder = async (
 ): Promise<boolean> => {
   try {
     const isModified = await Order.findOneAndUpdate(
-      { _id: orderId },
+      { _id: orderId, status: "pending", user: userId },
       { $set: { status: "cancelled" } },
       { new: true, runValidators: true }
     );
