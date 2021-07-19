@@ -1,5 +1,5 @@
 import { ICoupon, Coupon } from "../models/coupons.model";
-
+const couponGenerator = require("voucher-code-generator");
 // TODO: install package to generate coupon codes
 //3 days
 const COUPON_VALIDITY = 259200000;
@@ -10,7 +10,9 @@ export const createCoupon = async (
 ): Promise<boolean> => {
   try {
     // TODO: autogenerate this
-    const code = "hafnafvaava";
+    const code = couponGenerator.generate({
+      length: 8,
+    });
     const coupon = new Coupon({
       code: code,
       discount: discount,
