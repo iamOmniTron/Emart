@@ -5,6 +5,11 @@ import {
 } from "./constants";
 import paginate from "../utils/paginator";
 
+const userSelection = {
+  googleId: 0,
+  credits: 0,
+  rti: 0,
+};
 // TODO: find a way to paginate
 export const createUser = async (info: RegInfo): Promise<boolean> => {
   try {
@@ -15,29 +20,31 @@ export const createUser = async (info: RegInfo): Promise<boolean> => {
     if (!isSaved) return false;
     return true;
   } catch (error) {
-    return false;
+    throw new Error(error.message);
   }
 };
 
 export const getUser = async (userId: string): Promise<IUserDoc | null> => {
   try {
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId }).select(userSelection);
     if (!user) return null;
     // return paginate(user);
     return user;
   } catch (error) {
-    return null;
+    throw new Error(error.message);
   }
 };
 
 export const getVendor = async (userId: string): Promise<IUserDoc | null> => {
   try {
-    const vendor = await User.findOne({ _id: userId, vendor: true });
+    const vendor = await User.findOne({ _id: userId, vendor: true })
+      .populate("store")
+      .select(userSelection);
     if (!vendor) return null;
     // return paginate(vendor);
     return vendor;
   } catch (error) {
-    return null;
+    throw new Error(error.message);
   }
 };
 
@@ -46,12 +53,13 @@ export const fetchAllUsers = async (): Promise<Array<IUserDoc> | null> => {
     const users = await User.find({})
       .sort([["datecreated", 1]])
       .skip(0 * 20)
-      .limit(20);
+      .limit(20)
+      .select(userSelection);
     if (!users) return null;
     // return paginate(users);
     return users;
   } catch (error) {
-    return null;
+    throw new Error(error.message);
   }
 };
 
@@ -60,12 +68,13 @@ export const fetchAllVendors = async (): Promise<Array<IUserDoc> | null> => {
     const vendors = User.find({ vendor: true })
       .sort([["datecreated", 1]])
       .skip(0 * 20)
-      .limit(20);
+      .limit(20)
+      .select(userSelection);
     if (!vendors) return null;
     // return paginate(vendors);
     return vendors;
   } catch (error) {
-    return null;
+    throw new Error(error.message);
   }
 };
 
@@ -82,7 +91,7 @@ export const updateProfile = async (
     if (!updated) return false;
     return true;
   } catch (error) {
-    return false;
+    throw new Error(error.message);
   }
 };
 
@@ -99,7 +108,7 @@ export const updateCredit = async (
     if (!updated) return false;
     return true;
   } catch (error) {
-    return false;
+    throw new Error(error.message);
   }
 };
 
@@ -115,7 +124,7 @@ export const assignStore = async (
     if (!isSaved) return false;
     return true;
   } catch (error) {
-    return false;
+    throw new Error(error.message);
   }
 };
 
@@ -131,6 +140,6 @@ export const removeStore = async (
     if (!isSaved) return false;
     return true;
   } catch (error) {
-    return false;
+    throw new Error(error.message);
   }
 };

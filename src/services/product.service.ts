@@ -1,6 +1,18 @@
 import { IProduct, Product } from "../models/product.model";
 import { IProductDetails, ProductCategories as Categories } from "./constants";
 
+const productSelection = {
+  storeValidity: 0,
+  googleId: 0,
+  vendor: 0,
+  store: 0,
+  credits: 0,
+  rti: 0,
+  __v: 0,
+  storeId: 0,
+  createdAt: 0,
+};
+
 export const createProduct = async (
   productDetail: IProductDetails
 ): Promise<boolean> => {
@@ -16,7 +28,9 @@ export const createProduct = async (
 
 export const fetchAllProducts = async (): Promise<Array<IProduct> | null> => {
   try {
-    const products = await Product.find({});
+    const products = await Product.find({})
+      .populate(["storeId", "seller"])
+      .select(productSelection);
     if (!products || products == null) return null;
 
     return products;
@@ -29,7 +43,9 @@ export const fetchProduct = async (
   productId: string
 ): Promise<IProduct | null> => {
   try {
-    const product = await Product.findOne({ _id: productId });
+    const product = await Product.findOne({ _id: productId })
+      .populate(["storeId", "seller"])
+      .select(productSelection);
     if (!product || product == null) return null;
     return product;
   } catch (error) {
@@ -44,15 +60,21 @@ export const fetchByCategory = async (
     let products: Array<IProduct> | null;
     switch (category) {
       case Categories.SHOES:
-        products = await Product.find({ category: "shoe" });
+        products = await Product.find({ category: "shoe" })
+          .populate(["storeId", "seller"])
+          .select(productSelection);
         return products;
         break;
       case Categories.BAGS:
-        products = await Product.find({ category: "bag" });
+        products = await Product.find({ category: "bag" })
+          .populate(["storeId", "seller"])
+          .select(productSelection);
         return products;
         break;
       case Categories.DRESS:
-        products = await Product.find({ category: "dress" });
+        products = await Product.find({ category: "dress" })
+          .populate(["storeId", "seller"])
+          .select(productSelection);
         return products;
         break;
 
@@ -70,7 +92,9 @@ export const fetchByStore = async (
   storeId: string
 ): Promise<Array<IProduct> | null> => {
   try {
-    const products = await Product.find({ storeId });
+    const products = await Product.find({ storeId })
+      .populate(["storeId", "seller"])
+      .select(productSelection);
     if (!products) return null;
     return products;
   } catch (error) {

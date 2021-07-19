@@ -1,6 +1,13 @@
 import { Review, IReview } from "../models/review.model";
 import { IReviewData } from "./constants";
 
+const reviewSelection = {
+  googleId: 0,
+  vendor: 0,
+  store: 0,
+  createdAt: 0,
+};
+
 export const createReview = async (reviews: IReviewData): Promise<Boolean> => {
   try {
     const review = new Review({ ...reviews });
@@ -15,7 +22,9 @@ export const createReview = async (reviews: IReviewData): Promise<Boolean> => {
 export const fetchAllReviews = async (): Promise<Array<IReview> | null> => {
   try {
     // TODO: paginate
-    const reviews = await Review.find({});
+    const reviews = await Review.find({})
+      .populate("reviewer")
+      .select(reviewSelection);
     if (!reviews) return null;
     return reviews;
   } catch (error) {
@@ -25,7 +34,9 @@ export const fetchAllReviews = async (): Promise<Array<IReview> | null> => {
 
 export const getReview = async (reviewId: string): Promise<IReview | null> => {
   try {
-    const review = await Review.findOne({ _id: reviewId });
+    const review = await Review.findOne({ _id: reviewId })
+      .populate("reviewer")
+      .select(reviewSelection);
 
     if (!review) return null;
     return review;
