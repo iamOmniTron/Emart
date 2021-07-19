@@ -8,6 +8,7 @@ const CouponSchema = new Schema({
   },
   discount: {
     type: Number,
+    required: true,
   },
   used: {
     type: Boolean,
