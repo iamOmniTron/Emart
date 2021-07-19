@@ -3,7 +3,7 @@ import { User } from "./user.model";
 import { Store } from "./store.model";
 
 const ReviewSchema = new Schema({
-  reviewerId: {
+  reviewer: {
     type: Types.ObjectId,
     ref: "User",
     required: true,
@@ -29,7 +29,7 @@ const ReviewSchema = new Schema({
 });
 
 export interface IReview extends Document {
-  reviewerId: string;
+  reviewer: string;
   storeId: string;
   review: string;
   rating: number;
