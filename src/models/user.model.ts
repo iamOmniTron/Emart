@@ -1,4 +1,5 @@
 import { model, Document, Schema, Types } from "mongoose";
+import { Store } from "./store.model";
 
 const UserSchema = new Schema({
   firstname: {
@@ -31,7 +32,8 @@ const UserSchema = new Schema({
     type: Boolean,
   },
   store: {
-    type: String,
+    type: Types.ObjectId,
+    ref: "Store",
   },
   credits: {
     type: Number,
