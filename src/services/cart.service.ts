@@ -1,7 +1,7 @@
 import { IUserDoc as IUser } from "../models/user.model";
 import { IProduct } from "../models/product.model";
 import { Item } from "./constants";
-import { isExistElement, transverseStore } from "../lib/helper";
+// import { isExistElement, transverseStore } from "../lib/helper";
 
 export default class Cart {
   public user: IUser["_id"];
